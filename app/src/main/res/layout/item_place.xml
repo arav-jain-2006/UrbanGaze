@@ -75,9 +75,20 @@
             android:textSize="12sp"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
-            android:layout_marginRight="5dp"
             android:background="#E9F2F1"
             android:textColor="@color/primary"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:id="@+id/saveButton"
+            android:text="Save"
+            android:textSize="12sp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="6dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_save"
+            android:textColor="#FFF"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"/>
     </LinearLayout>

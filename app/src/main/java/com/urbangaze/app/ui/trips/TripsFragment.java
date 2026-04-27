@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.google.android.material.button.MaterialButton;
@@ -26,6 +27,7 @@ import java.util.List;
 
 public class TripsFragment extends Fragment {
     MaterialButton addTripButton;
+    LinearLayout emptyState;
     RecyclerView recyclerView;
     TripAdapter adapter;
     List<Trip> tripList = new ArrayList<>();
@@ -60,7 +62,6 @@ public class TripsFragment extends Fragment {
         initViews(view);
         setupRecycler();
         loadTrips();
-        setupAddTripListener();
     }
 
     private void initViews(View view) {
@@ -68,6 +69,7 @@ public class TripsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         db = FirebaseFirestore.getInstance();
         progressBar = view.findViewById(R.id.progressBar);
+        emptyState = view.findViewById(R.id.emptyState);
 
         addTripButton.setOnClickListener(v -> {
             AppData.getDestinations().clear();
@@ -80,7 +82,6 @@ public class TripsFragment extends Fragment {
         adapter = new TripAdapter(getContext(), tripList, new TripAdapter.OnTripClickListener() {
             @Override
             public void onViewTrip(int position) {
-                // Open trip details
                 Trip trip = tripList.get(position);
                 if (trip == null) return;
 
@@ -94,11 +95,9 @@ public class TripsFragment extends Fragment {
 
             @Override
             public void onEditTrip(int position) {
-                // Edit trip
                 Trip trip = tripList.get(position);
                 if (trip == null) return;
 
-//                AppData.setCurrentTrip(trip); // store trip for editing
                 editTrip(trip);
             }
         });
@@ -124,16 +123,6 @@ public class TripsFragment extends Fragment {
                 .commit();
     }
 
-    private void setupAddTripListener() {
-        requireActivity()
-            .getSupportFragmentManager()
-            .setFragmentResultListener(
-                "trip_saved",
-                this,
-                (requestKey, bundle) -> {
-        });
-    }
-
     private void loadTrips() {
         progressBar.setVisibility(View.VISIBLE);
         tripList.clear();
@@ -149,6 +138,7 @@ public class TripsFragment extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (queryDocumentSnapshots.isEmpty()) {
                         progressBar.setVisibility(View.GONE);
+                        emptyState.setVisibility(View.VISIBLE);
                         return;
                     }
 
@@ -177,6 +167,7 @@ public class TripsFragment extends Fragment {
 
                                     if (tripList.size() == queryDocumentSnapshots.size()) {
                                         progressBar.setVisibility(View.GONE);
+                                        emptyState.setVisibility(View.GONE);
                                     }
                                 });
                     }
@@ -193,6 +184,10 @@ public class TripsFragment extends Fragment {
                 .addOnSuccessListener(unused -> {
                     tripList.remove(trip);
                     adapter.notifyDataSetChanged();
+
+                    if (tripList.isEmpty()) {
+                        emptyState.setVisibility(View.VISIBLE);
+                    }
                 });
     }
 

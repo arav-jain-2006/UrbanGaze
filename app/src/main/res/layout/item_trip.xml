@@ -94,7 +94,7 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Summer in Paris"
+            android:text="Summer in Goa"
             android:textColor="#212121"
             android:textSize="20sp"
             android:textStyle="bold"

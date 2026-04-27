@@ -23,10 +23,8 @@ import com.ola.mapsdk.model.OlaLatLng;
 import com.ola.mapsdk.model.OlaMarkerOptions;
 import com.ola.mapsdk.model.OlaPolylineOptions;
 import com.ola.mapsdk.model.SnippetPropertiesOptions;
-import com.ola.mapsdk.view.Marker;
 import com.ola.mapsdk.view.OlaMap;
 import com.ola.mapsdk.view.OlaMapView;
-import com.ola.mapsdk.view.Polyline;
 import com.urbangaze.app.R;
 import com.urbangaze.app.data.AppData;
 import com.urbangaze.app.model.Destination;
@@ -143,7 +141,7 @@ public class ViewTripFragment extends Fragment {
                     .setIconSize(1.4f)
                     .setSnippet(d.getTitle())
                     .setSnippetPropertiesOptions(new SnippetPropertiesOptions.Builder()
-                            .setSnippetTextSize(9.0f)
+                            .setSnippetTextSize(12.0f)
                             .setInfoWindowStrokeColor("#1e7f75")
                             .setInfoWindowRadius(40.0f)
                             .build())
@@ -179,7 +177,7 @@ public class ViewTripFragment extends Fragment {
 
                 Destination currentDest = destList.get(index[0]);
 
-                OlaLatLng loc = new OlaLatLng(currentDest.getLatitude() + 0.004, currentDest.getLongitude(), 0);
+                OlaLatLng loc = new OlaLatLng(currentDest.getLatitude() + 0.007, currentDest.getLongitude(), 0);
                 olaMap.moveCameraToLatLong(loc, 12f, 1000);
 
                 RequestOptions options = new RequestOptions()

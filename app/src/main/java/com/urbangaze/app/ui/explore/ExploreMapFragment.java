@@ -2,8 +2,9 @@ package com.urbangaze.app.ui.explore;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,6 @@ import com.urbangaze.app.utils.Constants;
 import com.ola.mapsdk.camera.MapControlSettings;
 import com.ola.mapsdk.camera.OlaCameraPosition;
 import com.ola.mapsdk.interfaces.OlaMapCallback;
-import com.ola.mapsdk.model.OlaLatLng;
 import com.ola.mapsdk.model.OlaMarkerOptions;
 import com.ola.mapsdk.model.SnippetPropertiesOptions;
 import com.ola.mapsdk.view.OlaMap;
@@ -96,7 +96,7 @@ public class ExploreMapFragment extends Fragment {
         });
 
         backButton.setOnClickListener(v -> {
-            requireActivity().getSupportFragmentManager().popBackStack();
+            requireActivity().getSupportFragmentManager().popBackStack("MAP", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         });
     }
     private void initLocationAndMap() {
@@ -175,6 +175,7 @@ public class ExploreMapFragment extends Fragment {
     private void openPlacePreview(Place place) {
         PlacePreviewFragment fragment =
                 PlacePreviewFragment.newInstance(
+                        place.placeId,
                         place.title,
                         place.loc.getLatitude(),
                         place.loc.getLongitude(),

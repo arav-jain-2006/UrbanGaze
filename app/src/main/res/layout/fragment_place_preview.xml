@@ -91,19 +91,31 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/openMapsBtn"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="44dp"
+                    android:layout_weight="1"
                     app:icon="@drawable/ic_map"
                     app:iconTint="@color/primary"
                     app:iconGravity="textStart"
-                    app:iconPadding="6dp"
-                    android:text="Open in Maps"
+                    android:text="Maps"
                     android:textColor="@color/primary"
                     app:cornerRadius="14dp"
                     app:strokeWidth="1dp"
                     app:strokeColor="#33000000"
                     android:backgroundTint="@color/background"
                     android:layout_marginEnd="8dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/saveBtn"
+                    app:icon="@drawable/ic_bookmark"
+                    app:iconGravity="textStart"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    app:cornerRadius="14dp"/>
             </LinearLayout>
 
         </LinearLayout>

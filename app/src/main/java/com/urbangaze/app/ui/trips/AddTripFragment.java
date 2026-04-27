@@ -288,7 +288,6 @@ public class AddTripFragment extends Fragment {
     }
 
     private void finish() {
-        getParentFragmentManager().setFragmentResult("trip_saved", new Bundle());
         requireActivity().getSupportFragmentManager().popBackStack();
     }
     private void deleteOldDestinations(String userId, String tripId, Runnable onComplete) {

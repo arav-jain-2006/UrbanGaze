@@ -28,7 +28,7 @@
         android:text="Trip Title"
         android:textSize="24sp"
         android:textColor="@color/primary"
-        android:background="#99FFFFFF"
+        android:background="#66FFFFFF"
         android:elevation="6dp"
         android:textStyle="bold"
         android:gravity="center"

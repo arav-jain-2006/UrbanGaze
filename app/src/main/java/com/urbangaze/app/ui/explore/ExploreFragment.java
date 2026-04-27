@@ -75,12 +75,6 @@ public class ExploreFragment extends Fragment {
         requestLocationAtStartup();
         initViews(view);
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
     private void requestLocationAtStartup() {
         if (ContextCompat.checkSelfPermission(requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -117,6 +111,7 @@ public class ExploreFragment extends Fragment {
         setupSearch();
         setupPlacesRecycler();
         setupMapView();
+        setupSaveListener();
     }
 
     private void setupPlacesRecycler() {
@@ -157,6 +152,19 @@ public class ExploreFragment extends Fragment {
                 });
     }
 
+    private void setupSaveListener() {
+        requireActivity().getSupportFragmentManager()
+            .setFragmentResultListener(
+                "refresh_saved_places",
+                getViewLifecycleOwner(),
+                (key, bundle) -> {
+                    if (adapter != null) {
+                        adapter.loadSavedPlaces();
+                    }
+                }
+            );
+    }
+
     private void setupChips() {
         if (defaultChip != null) {
             chipGroup.check(defaultChip.getId());
@@ -186,7 +194,7 @@ public class ExploreFragment extends Fragment {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container, new ExploreMapFragment())
-                .addToBackStack(null)
+                .addToBackStack("MAP")
                 .commit();
     }
     private void getNearbyPlaces(double lat, double lng) {

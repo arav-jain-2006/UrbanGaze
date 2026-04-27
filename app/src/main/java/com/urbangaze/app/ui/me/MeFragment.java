@@ -27,6 +27,7 @@ public class MeFragment extends Fragment {
     EditText password;
     Button saveBtn;
     MaterialButton logoutBtn;
+    LinearLayout savedPlacesBtn;
 
 
 
@@ -58,6 +59,14 @@ public class MeFragment extends Fragment {
         logoutBtn = view.findViewById(R.id.logoutBtn);
         password = view.findViewById(R.id.etPassword);
         saveBtn = view.findViewById(R.id.saveBtn);
+        savedPlacesBtn = view.findViewById(R.id.savedPlacesLayout);
+
+        savedPlacesBtn.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, new SavedPlacesFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         logoutBtn.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();

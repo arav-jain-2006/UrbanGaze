@@ -3,6 +3,7 @@ package com.urbangaze.app.ui.explore;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +12,46 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.urbangaze.app.R;
 import com.urbangaze.app.model.Place;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.PlaceViewHolder> {
     private Context context;
     private List<Place> places;
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String userId = FirebaseAuth.getInstance().getUid();
+    private Set<String> savedIds = new HashSet<>();
     public PlaceListAdapter(Context context, List<Place> places) {
         this.context = context;
         this.places = places;
+        loadSavedPlaces();
+    }
+
+    public void loadSavedPlaces() {
+        if (userId == null) return;
+
+        db.collection("users")
+                .document(userId)
+                .collection("savedPlaces")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    savedIds.clear();
+                    for (DocumentSnapshot doc : querySnapshot) {
+                        savedIds.add(doc.getId());
+                    }
+                    notifyDataSetChanged();
+                });
     }
 
     public void updateList(List<Place> newList) {
@@ -42,12 +71,67 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
     public void onBindViewHolder(@NonNull PlaceViewHolder holder, int position) {
         Place place = places.get(position);
 
+        Log.d("BIND", "TEST");
+
         holder.title.setText(place.title);
         holder.address.setText(place.address);
         holder.distance.setText(place.distance + " m");
 
+        boolean isSaved = savedIds.contains(place.placeId);
+        holder.saveButton.setText(isSaved ? "Saved" : "Save");
+        holder.saveButton.setBackgroundResource(
+                isSaved ? R.drawable.bg_saved : R.drawable.bg_save
+        );
+
         holder.mapButton.setOnClickListener(v -> {
             openInGoogleMaps(place.loc.getLatitude(), place.loc.getLongitude(), place.title, place.address);
+        });
+
+        holder.saveButton.setOnClickListener(v -> {
+            if (userId == null) return;
+
+            boolean currentlySaved = savedIds.contains(place.placeId);
+
+            if (currentlySaved) {
+                db.collection("users")
+                        .document(userId)
+                        .collection("savedPlaces")
+                        .document(place.placeId)
+                        .delete()
+                        .addOnSuccessListener(unused -> {
+                            savedIds.remove(place.placeId);
+                            holder.saveButton.setText("Save");
+                            holder.saveButton.setBackgroundResource(
+                                    R.drawable.bg_save
+                            );
+                        });
+
+            } else {
+                double lat = place.loc.getLatitude();
+                double lng = place.loc.getLongitude();
+
+                Map<String, Object> data = new HashMap<>();
+                data.put("placeId", place.placeId);
+                data.put("title", place.title);
+                data.put("address", place.address);
+                data.put("lat", lat);
+                data.put("lng", lng);
+
+                db.collection("users")
+                    .document(userId)
+                    .collection("savedPlaces")
+                    .document(place.placeId)
+                    .set(data)
+                    .addOnSuccessListener(unused -> {
+                        savedIds.add(place.placeId);
+                        holder.saveButton.setText("Saved");
+                        holder.saveButton.setBackgroundResource(
+                                R.drawable.bg_saved
+                        );
+                    });
+            }
+
+
         });
     }
 
@@ -76,7 +160,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
     }
     public static class PlaceViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title, address, distance, mapButton;
+        TextView title, address, distance, mapButton, saveButton;
 
         public PlaceViewHolder(View itemView) {
             super(itemView);
@@ -85,6 +169,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
             address = itemView.findViewById(R.id.txtAddress);
             distance = itemView.findViewById(R.id.txtDistance);
             mapButton = itemView.findViewById(R.id.mapButton);
+            saveButton = itemView.findViewById(R.id.saveButton);
         }
     }
 }
