@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#E8EBE9"
+    android:padding="28dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:strokeColor="@android:color/transparent"
+        app:cardCornerRadius="28dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UrbanGaze"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:letterSpacing="0.03"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Explore • Connect • Travel"
+        android:textSize="16sp"
+        android:textColor="#666"
+        android:letterSpacing="0.05"
+        android:layout_marginBottom="160dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/getStartedBtn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Get Started"
+        android:layout_marginHorizontal="30dp"
+        android:textSize="16sp"
+        app:cornerRadius="16dp"
+        android:backgroundTint="@color/primary"
+        app:elevation="4dp"/>
+
+</LinearLayout>

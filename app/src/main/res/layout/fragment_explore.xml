@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/frag_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explore"
+            android:textSize="24sp"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="40dp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_search"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:elevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/frag_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:text="🔍"
+                android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                android:text="  Find nearby treasures..."
+                android:textColor="#9AA5A3"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/chips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/search"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true"
+                app:chipSpacingHorizontal="8dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_allplaces"
+                    android:text="All Places"
+                    app:chipCornerRadius="20dp"
+                    app:chipBackgroundColor="@drawable/chip_bg_selector"
+                    app:chipStrokeWidth="0dp"
+                    android:checkable="true"
+                    android:textColor="@drawable/chip_text_selector"
+                    android:textSize="13sp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_food"
+                    android:text="Food"
+                    app:chipCornerRadius="20dp"
+                    app:chipBackgroundColor="@drawable/chip_bg_selector"
+                    app:chipStrokeWidth="0dp"
+                    android:checkable="true"
+                    android:textColor="@drawable/chip_text_selector"
+                    android:textSize="13sp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_stay"
+                    android:text="Stay"
+                    app:chipCornerRadius="20dp"
+                    app:chipBackgroundColor="@drawable/chip_bg_selector"
+                    app:chipStrokeWidth="0dp"
+                    android:checkable="true"
+                    android:textColor="@drawable/chip_text_selector"
+                    android:textSize="13sp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_attractions"
+                    android:text="Attractions"
+                    app:chipCornerRadius="20dp"
+                    app:chipBackgroundColor="@drawable/chip_bg_selector"
+                    app:chipStrokeWidth="0dp"
+                    android:checkable="true"
+                    android:textColor="@drawable/chip_text_selector"
+                    android:textSize="13sp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_outdoors"
+                    android:text="Outdoors"
+                    app:chipCornerRadius="20dp"
+                    app:chipBackgroundColor="@drawable/chip_bg_selector"
+                    app:chipStrokeWidth="0dp"
+                    android:checkable="true"
+                    android:textColor="@drawable/chip_text_selector"
+                    android:textSize="13sp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_shopping"
+                    android:text="Shopping"
+                    app:chipCornerRadius="20dp"
+                    app:chipBackgroundColor="@drawable/chip_bg_selector"
+                    app:chipStrokeWidth="0dp"
+                    android:checkable="true"
+                    android:textColor="@drawable/chip_text_selector"
+                    android:textSize="13sp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_entertainment"
+                    android:text="Entertainment"
+                    app:chipCornerRadius="20dp"
+                    app:chipBackgroundColor="@drawable/chip_bg_selector"
+                    app:chipStrokeWidth="0dp"
+                    android:checkable="true"
+                    android:textColor="@drawable/chip_text_selector"
+                    android:textSize="13sp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mapCard"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:layout_constraintTop_toBottomOf="@id/chips"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/bg_map"
+                        android:scaleType="centerCrop"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#50000000"/>
+                </FrameLayout>
+
+                <TextView
+                    android:text="CURRENT REGION"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:textColor="#FFFFFF"
+                    android:alpha="0.8"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="28dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                    android:id="@+id/currentRegionTxt"
+                    android:text="Your Location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/btnMap"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/primary_button_bg"
+                    android:src="@drawable/ic_map"
+                    android:scaleType="centerInside"
+                    android:padding="8dp"
+                    android:layout_margin="12dp"
+                    android:contentDescription="Open map"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:tint="#FFFFFF" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/title"
+            android:text="Places Nearby"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1F2A28"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/mapCard"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:nestedScrollingEnabled="false" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

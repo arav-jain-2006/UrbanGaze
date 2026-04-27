@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_explore"
+        android:title="Explore"
+        android:icon="@drawable/explore_selector"/>
+    <item
+        android:id="@+id/menu_buddies"
+        android:title="Buddies"
+        android:icon="@drawable/buddies_selector"/>
+    <item
+        android:id="@+id/menu_trips"
+        android:title="Trips"
+        android:icon="@drawable/trips_selector"/>
+    <item
+        android:id="@+id/menu_me"
+        android:title="Me"
+        android:icon="@drawable/me_selector"/>
+</menu>
